@@ -2,6 +2,9 @@ from django.db import models
 
 
 # Create your models here.
+from django.urls import reverse
+
+
 class Project(models.Model):
     """ Model for projects """
     title = models.CharField(max_length=100, help_text='Enter project title')
@@ -23,6 +26,9 @@ class Task(models.Model):
     def __str__(self):
         """ String representation for model object """
         return self.task_name
+
+    def get_absolute_url(self):
+        return reverse('task-detail', args=[str(self.id)])
 
 
 class Team(models.Model):
