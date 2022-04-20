@@ -7,7 +7,7 @@
             <div class="col-md-9">
                 <div class="card px-3">
                     <div class="card-body">
-                        <h4 class="display-5 text-primary">All Tasks</h4>
+                        <h4 class="display-5 text-primary">Today's Tasks</h4>
                           <form action="" method="post">
                               {% load widget_tweaks %}
                               {% csrf_token %}
@@ -26,12 +26,7 @@
                                     <a href="{{ task.get_absolute_url }}">{{ task.task_name }}</a>
                                     <a style="float: right;" href="{% url 'task-delete' task.id %}"><i class="fa fa-trash-o text-danger btn m-0 p-0"></i></a>
                                     <a style="float: right; margin-right:1em;" href="{% url 'task-update' task.id %}"><i class="fa fa-pencil text-info btn m-0 p-0"></i></a>
-
-                                    {% if task.is_expired %}
-                                        <a style="float: right; margin-right:2em; color:red;">{{ task.due_date }}</a>{}
-                                    {% else %}
-                                        <a style="float: right; margin-right:2em;">{{ task.due_date }}</a>{}
-                                    {% endif %}
+                                    <a style="float: right; margin-right:2em;">{{ task.due_date }}</a>
 
                                     </div>
 <!--                                    <i class="remove mdi mdi-close-circle-outline"></i>-->

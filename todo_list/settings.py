@@ -64,7 +64,7 @@ ROOT_URLCONF = 'todo_list.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,5 +148,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     # os.path.join(BASE_DIR, "static"),
 ]
+
+LOGIN_REDIRECT_URL = "/"
+
+# django_project/settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 

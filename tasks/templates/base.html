@@ -23,17 +23,19 @@
       <div class="col-sm-2">
       {% block sidebar %}
         <ul class="sidebar-nav">
-          <li><a href="{% url 'today' %}">Home</a></li>
-          <li><a href="#">All books</a></li>
-          <li><a href="#">All authors</a></li>
+          <li><a href="{% url 'today' %}">Today</a></li>
+          <li><a href="{% url 'all-tasks' %}">All tasks</a></li>
+          <li><a href="#">Projects</a></li>
             {% if user.is_authenticated %}
              <li style="margin-top:2em;">User: {{ user.get_username }}</li>
-             <li><a href="#">My Borrowed</a></li>
-             <li><a href="#">Logout</a></li>
-             <li style="margin-top:2em;">Staff</li>
-             <li><a href="#">All Borrowed</a></li>
+             <li><a href="#">My Tasks</a></li>
+             <li><a href="#">My Projects</a></li>
+             <li><a href="{% url 'logout' %}">Logout</a></li>
+<!--             <li style="margin-top:2em;">Staff</li>-->
+<!--             <li><a href="#">All Borrowed</a></li>-->
             {% else %}
-             <li><a href="#">Login</a></li>
+             <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+             <li><a href="{% url 'register' %}">Register</a></li>
             {% endif %}
         </ul>
       {% endblock %}

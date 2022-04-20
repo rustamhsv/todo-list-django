@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -25,6 +27,12 @@ class Task(models.Model):
     files = models.FileField(upload_to='attachments/%Y/%m/%d', blank=True, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ManyToManyField(User, help_text='Assign user to this task', blank=True)
+
+    @property
+    def is_expired(self):
+        if self.due_date < datetime.date.today():
+            return True
+        return False
 
     def __str__(self):
         """ String representation for model object """
