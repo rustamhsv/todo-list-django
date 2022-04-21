@@ -25,7 +25,7 @@
         <ul class="sidebar-nav">
           <li><a href="{% url 'today' %}">Today</a></li>
           <li><a href="{% url 'all-tasks' %}">All tasks</a></li>
-          <li><a href="#">Projects</a></li>
+          <li><a href="{% url 'projects' %}">Projects</a></li>
             {% if user.is_authenticated %}
              <li style="margin-top:2em;">User: {{ user.get_username }}</li>
              <li><a href="#">My Tasks</a></li>

@@ -11,7 +11,12 @@ from django.urls import reverse
 class Project(models.Model):
     """ Model for projects """
     title = models.CharField(max_length=100, help_text='Enter project title')
+    description = models.TextField(max_length=1000, help_text='Write project description', blank=True)
+
     user = models.ManyToManyField(User, help_text='Assign user to this project', blank=True)
+
+    def get_absolute_url(self):
+        return reverse('project-detail', args=[str(self.id)])
 
     """ String representation for Projects model """
     def __str__(self):

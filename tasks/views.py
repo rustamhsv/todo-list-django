@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -7,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from tasks.forms import AddNewTaskForm, RegistrationForm
-from tasks.models import Task
+from tasks.models import Task, Project
 
 
 class TaskListView(generic.ListView, generic.FormView):
@@ -37,6 +38,27 @@ class TodayTasksListView(generic.ListView, generic.FormView):
 
     def get_queryset(self):
         return Task.objects.filter(due_date__exact=datetime.date.today())
+
+
+class ProjectListView(generic.ListView):
+    model = Project
+
+
+class ProjectDetailView(generic.DetailView):
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # get the project by primary key
+        projects = Project.objects.filter(pk=self.kwargs['pk'])
+
+        users = None
+        if projects:
+            users = projects[0].user.all()
+
+        context['users'] = users
+        return context
 
 
 class TaskDetailView(generic.DetailView):

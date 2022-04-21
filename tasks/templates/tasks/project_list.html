@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-md" id="page-content" >
+    <div class="padding">
+            <div class="col-md-9">
+                <div class="card px-3">
+                    <div class="card-body">
+                        <h4 class="display-5 text-primary">Projects</h4>
+
+<!--                        {{ form.as_p }}-->
+<!--                        <div class="add-items d-flex"> <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button> </div>-->
+                        <div class="list-wrapper" style="margin-top:3em;">
+                               {% for project in project_list %}
+                                    <div style="width:100%; margin-bottom:0.4em;">
+                                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                                    </div>
+<!--                                    <i class="remove mdi mdi-close-circle-outline"></i>-->
+<!--                                    <a href="{{ task.get_absolute_url }}"><div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> {{ task.task_name }} <i class="input-helper"></i></label> </div></a> <i class="remove mdi mdi-close-circle-outline"></i>-->
+                               {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock %}
