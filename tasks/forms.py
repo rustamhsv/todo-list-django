@@ -17,10 +17,11 @@ class AddNewTaskForm(forms.ModelForm):
         self.fields['task_name'].help_text = ""
         self.fields['task_description'].help_text = ""
         self.fields['due_date'].help_text = ""
+        # self.fields['user'].help_text = ""
 
     class Meta:
         model = Task
-        fields = ['task_name', 'task_description', 'due_date']
+        fields = ['task_name', 'task_description', 'due_date', 'user']
         widgets = {
             'due_date': DateInput(),
         }

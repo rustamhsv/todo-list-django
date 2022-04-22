@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container-md" id="page-content" >
-    <div class="padding">
+<!--    <div class="padding">-->
             <div class="col-md-9">
                 <div class="card px-3">
                     <div class="card-body">
@@ -28,9 +28,9 @@
                                     <a style="float: right; margin-right:1em;" href="{% url 'task-update' task.id %}"><i class="fa fa-pencil text-info btn m-0 p-0"></i></a>
 
                                     {% if task.is_expired %}
-                                        <a style="float: right; margin-right:2em; color:red;">{{ task.due_date }}</a>{}
+                                        <a style="float: right; margin-right:2em; color:red;">{{ task.due_date }}</a>
                                     {% else %}
-                                        <a style="float: right; margin-right:2em;">{{ task.due_date }}</a>{}
+                                        <a style="float: right; margin-right:2em;">{{ task.due_date }}</a>
                                     {% endif %}
 
                                     </div>
@@ -42,6 +42,6 @@
                 </div>
             </div>
     </div>
-</div>
+<!--</div>-->
 
 {% endblock %}

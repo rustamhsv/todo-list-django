@@ -61,6 +61,22 @@ class ProjectDetailView(generic.DetailView):
         return context
 
 
+class ProjectCreate(CreateView):
+    model = Project
+    fields = ['title', 'description', 'user']
+
+
+class ProjectUpdate(UpdateView):
+    model = Project
+    fields = ['title', 'description', 'user']
+    template_name = 'tasks/project_update_form.html'
+
+
+class ProjectDelete(DeleteView):
+    model = Project
+    success_url = reverse_lazy('projects')
+
+
 class TaskDetailView(generic.DetailView):
     model = Task
 
