@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from tasks.forms import AddNewTaskForm, RegistrationForm
+from tasks.forms import AddNewTaskForm, RegistrationForm, AddMyTaskForm
 from tasks.models import Task, Project
 
 
@@ -38,6 +38,34 @@ class TodayTasksListView(generic.ListView, generic.FormView):
 
     def get_queryset(self):
         return Task.objects.filter(due_date__exact=datetime.date.today())
+
+
+class MyTasksListView(generic.ListView, generic.FormView):
+    model = Task
+    form_class = AddMyTaskForm
+    success_url = '/tasks/my-tasks'
+    initial = {'due_date': datetime.date.today()}
+    template_name = 'tasks/my_task_list.html'
+
+    def form_valid(self, form):
+        # manually save data to db & assign task for logged in user
+        my_task = Task.objects.create(
+            task_name=form.cleaned_data['task_name'],
+            task_description=form.cleaned_data['task_description'],
+            due_date=form.cleaned_data['due_date'],
+            files=form.cleaned_data['files'],
+            project=form.cleaned_data['project'],
+        )
+
+        # cannot set ManyToManyField in create methods, have to add later on
+        my_task.user.add(self.request.user)
+
+        # save to db
+        my_task.save()
+        return super().form_valid(form)
+
+    def get_queryset(self):
+        return Task.objects.filter(user__exact=self.request.user)
 
 
 class ProjectListView(generic.ListView):

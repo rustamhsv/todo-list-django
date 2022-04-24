@@ -5,12 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/tasks/project_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/templates/tasks/project_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/tasks/project_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/templates/tasks/project_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/tasks/task_confirm_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/templates/tasks/task_confirm_delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/tasks/task_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/templates/tasks/task_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/tasks/task_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/templates/tasks/task_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/tasks/today_task_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/templates/tasks/today_task_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/views.py" afterDir="false" />
     </list>

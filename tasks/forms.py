@@ -27,6 +27,22 @@ class AddNewTaskForm(forms.ModelForm):
         }
 
 
+class AddMyTaskForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddMyTaskForm, self).__init__(*args, **kwargs)
+        self.fields['task_name'].help_text = ""
+        self.fields['task_description'].help_text = ""
+        self.fields['due_date'].help_text = ""
+        # self.fields['user'] = 'rustam'
+
+    class Meta:
+        model = Task
+        exclude = ['user']
+        widgets = {
+            'due_date': DateInput(),
+        }
+
+
 class RegistrationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):

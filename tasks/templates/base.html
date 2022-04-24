@@ -28,7 +28,7 @@
           <li><a href="{% url 'projects' %}">Projects</a></li>
             {% if user.is_authenticated %}
              <li style="margin-top:2em;">User: {{ user.get_username }}</li>
-             <li><a href="#">My Tasks</a></li>
+             <li><a href="{% url 'my-tasks' %}">My Tasks</a></li>
              <li><a href="#">My Projects</a></li>
              <li><a href="{% url 'logout' %}">Logout</a></li>
 <!--             <li style="margin-top:2em;">Staff</li>-->

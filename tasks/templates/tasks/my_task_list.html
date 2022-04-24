@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-md" id="page-content" >
+<!--    <div class="padding">-->
+            <div class="col-md-9">
+                <div class="card px-3">
+                    <div class="card-body">
+                        <h4 class="display-5 text-primary">My Tasks</h4>
+                          <form action="" method="post">
+                              {% load widget_tweaks %}
+                              {% csrf_token %}
+                                  <table>
+                                    {{ form.as_table }}
+                                </table>
+                                  <input class="btn btn-primary" type="submit" value="Add">
+                          </form>
+
+<!--                        {{ form.as_p }}-->
+<!--                        <div class="add-items d-flex"> <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button> </div>-->
+                        <div class="list-wrapper" style="margin-top:3em;">
+                               {% for task in task_list %}
+                                    <div style="width:100%; margin-bottom:0.4em;">
+                                    <input type="checkbox">
+                                    <a href="{{ task.get_absolute_url }}">{{ task.task_name }}</a>
+                                    <a style="float: right;" href="{% url 'task-delete' task.id %}"><i class="fa fa-trash-o text-danger btn m-0 p-0"></i></a>
+                                    <a style="float: right; margin-right:1em;" href="{% url 'task-update' task.id %}"><i class="fa fa-pencil text-info btn m-0 p-0"></i></a>
+                                    <a style="float: right; margin-right:2em;">{{ task.due_date }}</a>
+
+                                    </div>
+<!--                                    <i class="remove mdi mdi-close-circle-outline"></i>-->
+<!--                                    <a href="{{ task.get_absolute_url }}"><div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> {{ task.task_name }} <i class="input-helper"></i></label> </div></a> <i class="remove mdi mdi-close-circle-outline"></i>-->
+                               {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--    </div>-->
+</div>
+
+{% endblock %}

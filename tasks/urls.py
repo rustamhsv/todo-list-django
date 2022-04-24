@@ -6,8 +6,10 @@ urlpatterns = [
     path('', views.TaskListView.as_view(), name='all-tasks'),
     path('today/', views.TodayTasksListView.as_view(), name='today'),
     path('task/<int:pk>', views.TaskDetailView.as_view(), name='task-detail'),
+    path('my-tasks/', views.MyTasksListView.as_view(), name='my-tasks'),
     path('projects', views.ProjectListView.as_view(), name='projects'),
     path('project/<int:pk>', views.ProjectDetailView.as_view(), name='project-detail'),
+    # path('my-projects/', views.MyProjectsListView.as_view(), name='my-projects'),
 ]
 
 urlpatterns += [
