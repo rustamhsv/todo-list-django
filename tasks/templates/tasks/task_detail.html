@@ -3,8 +3,15 @@
 {% block content %}
 
 <h1>{{ task.task_name }}</h1>
-<p> {{ task.task_description }}</p>
-<p> {{ task.due_date }}</p>
-
+<p> <strong>Description:</strong>{{ task.task_description }}</p>
+<p> <strong>Deadline:</strong> {{ task.due_date }}</p>
+<p> <strong>Project:</strong> {{ task.project }}</p>
+<strong>Assigned to:</strong>
+<ol>
+    {% for user in users %}
+       <li>{{ user.username }}</li>
+    {% endfor %}
+</ol>
+<a href="../../media/{{ task.files }}"><strong style="color:black;">Attachment: </strong>{{ task.files }}</a>
 
 {% endblock %}

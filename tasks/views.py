@@ -107,7 +107,22 @@ class ProjectDelete(DeleteView):
 
 class TaskDetailView(generic.DetailView):
     model = Task
-
+    
+    def get_context_data(self, **kwargs):
+        context = super(TaskDetailView, self).get_context_data()
+        
+        # get task by primary key
+        tasks = Task.objects.filter(pk=self.kwargs['pk'])
+        
+        # get users
+        users = None
+        if tasks:
+            users = tasks[0].user.all()
+            print('FILES: ', tasks[0].files)
+        
+        context['users'] = users
+        return context
+        
 
 class TaskDelete(DeleteView):
     model = Task
@@ -116,7 +131,7 @@ class TaskDelete(DeleteView):
 
 class TaskUpdate(UpdateView):
     model = Task
-    fields = ['task_name', 'task_description', 'due_date']
+    fields = ['task_name', 'task_description', 'due_date', 'files', 'user', 'project']
 
 
 class RegistrationView(SuccessMessageMixin, CreateView):
