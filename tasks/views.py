@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
@@ -11,11 +12,12 @@ from tasks.forms import AddNewTaskForm, RegistrationForm, AddMyTaskForm
 from tasks.models import Task, Project
 
 
-class TaskListView(generic.ListView, generic.FormView):
+class TaskListView(LoginRequiredMixin, generic.ListView, generic.FormView):
     model = Task
     form_class = AddNewTaskForm
     success_url = '/tasks/'
     initial = {'due_date': datetime.date.today()}
+    redirect_field_name = 'login'
 
     def form_valid(self, form):
         form.save()
@@ -25,12 +27,13 @@ class TaskListView(generic.ListView, generic.FormView):
         return Task.objects.order_by('-due_date')
 
 
-class TodayTasksListView(generic.ListView, generic.FormView):
+class TodayTasksListView(LoginRequiredMixin, generic.ListView, generic.FormView):
     model = Task
     form_class = AddNewTaskForm
     success_url = '/tasks/today'
     initial = {'due_date': datetime.date.today()}
     template_name = 'tasks/today_task_list.html'
+    redirect_field_name = 'login'
 
     def form_valid(self, form):
         form.save()
@@ -40,12 +43,13 @@ class TodayTasksListView(generic.ListView, generic.FormView):
         return Task.objects.filter(due_date__exact=datetime.date.today())
 
 
-class MyTasksListView(generic.ListView, generic.FormView):
+class MyTasksListView(LoginRequiredMixin, generic.ListView, generic.FormView):
     model = Task
     form_class = AddMyTaskForm
     success_url = '/tasks/my-tasks'
     initial = {'due_date': datetime.date.today()}
     template_name = 'tasks/my_task_list.html'
+    redirect_field_name = 'login'
 
     def form_valid(self, form):
         # manually save data to db & assign task for logged in user
@@ -68,45 +72,9 @@ class MyTasksListView(generic.ListView, generic.FormView):
         return Task.objects.filter(user__exact=self.request.user)
 
 
-class ProjectListView(generic.ListView):
-    model = Project
-
-
-class ProjectDetailView(generic.DetailView):
-    model = Project
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # get the project by primary key
-        projects = Project.objects.filter(pk=self.kwargs['pk'])
-
-        users = None
-        if projects:
-            users = projects[0].user.all()
-
-        context['users'] = users
-        return context
-
-
-class ProjectCreate(CreateView):
-    model = Project
-    fields = ['title', 'description', 'user']
-
-
-class ProjectUpdate(UpdateView):
-    model = Project
-    fields = ['title', 'description', 'user']
-    template_name = 'tasks/project_update_form.html'
-
-
-class ProjectDelete(DeleteView):
-    model = Project
-    success_url = reverse_lazy('projects')
-
-
-class TaskDetailView(generic.DetailView):
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
+    redirect_field_name = 'login'
     
     def get_context_data(self, **kwargs):
         context = super(TaskDetailView, self).get_context_data()
@@ -124,14 +92,16 @@ class TaskDetailView(generic.DetailView):
         return context
         
 
-class TaskDelete(DeleteView):
+class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('today')
+    redirect_field_name = 'login'
 
 
-class TaskUpdate(UpdateView):
+class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = ['task_name', 'task_description', 'due_date', 'files', 'user', 'project']
+    redirect_field_name = 'login'
 
 
 class RegistrationView(SuccessMessageMixin, CreateView):

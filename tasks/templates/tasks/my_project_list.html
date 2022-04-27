@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-md" id="page-content" >
+<!--    <div class="padding">-->
+            <div class="col-md-9">
+                <div class="card px-3">
+                    <div class="card-body">
+                        <h4 class="display-5 text-primary">Projects</h4>
+
+<!--                        {{ form.as_p }}-->
+<!--                        <div class="add-items d-flex"> <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button> </div>-->
+                        <div class="list-wrapper" style="margin-top:3em;">
+                               {% for project in project_list %}
+                                    <div style="width:100%; margin-bottom:0.4em;">
+                                        <a style="color:#414141;" href="{{ project.get_absolute_url }}"><strong>{{ project.title }}</strong></a>
+                                        <a style="float: right;" href="{% url 'project-delete' project.id %}"><i class="fa fa-trash-o text-danger btn m-0 p-0"></i></a>
+                                        <a style="float: right; margin-right:1em;" href="{% url 'project-update' project.id %}"><i class="fa fa-pencil text-info btn m-0 p-0"></i></a>
+                                    </div>
+<!--                                    <i class="remove mdi mdi-close-circle-outline"></i>-->
+<!--                                    <a href="{{ task.get_absolute_url }}"><div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> {{ task.task_name }} <i class="input-helper"></i></label> </div></a> <i class="remove mdi mdi-close-circle-outline"></i>-->
+                               {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                    <a style="margin-top:2em;" href="{% url 'project-create' %}">Create new project</a>
+
+            </div>
+
+<!--    </div>-->
+</div>
+
+{% endblock %}
