@@ -35,6 +35,7 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # add authentication paths
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('allauth.urls')),
 ]
 
 # redirect to tasks app

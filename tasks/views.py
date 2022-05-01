@@ -10,6 +10,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from tasks.forms import AddNewTaskForm, RegistrationForm, AddMyTaskForm
 from tasks.models import Task, Project
+from tasks.tasks import get_google_calendar_events
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView, generic.FormView):
@@ -24,6 +25,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView, generic.FormView):
         return super().form_valid(form)
 
     def get_queryset(self):
+        get_google_calendar_events(self.request.user)
         return Task.objects.order_by('-due_date')
 
 

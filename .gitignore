@@ -1,2 +1,4 @@
 .env
 .pyc
+google-credentials.json
+token.json
