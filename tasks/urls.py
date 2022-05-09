@@ -22,4 +22,6 @@ urlpatterns += [
 
 urlpatterns += [
     path('register/', views.RegistrationView.as_view(), name='register'),
+    path('integrate-google-calendar/', views.integrate_google_calender, name='integrate-google-calendar'),
+    path('calendar-integrated/', views.calendar_integrated, name='calendar-integrated'),
 ]

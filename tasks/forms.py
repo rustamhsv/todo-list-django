@@ -64,3 +64,7 @@ class RegistrationForm(UserCreationForm):
     #         user.save()
     #
     #     return user
+
+
+class EmailForm(forms.Form):
+    email = forms.EmailField()

@@ -3,12 +3,12 @@ import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from tasks.forms import AddNewTaskForm, RegistrationForm, AddMyTaskForm
+from tasks.forms import AddNewTaskForm, RegistrationForm, AddMyTaskForm, EmailForm
 from tasks.models import Task, Project
 from tasks.tasks import get_google_calendar_events
 
@@ -25,7 +25,6 @@ class TaskListView(LoginRequiredMixin, generic.ListView, generic.FormView):
         return super().form_valid(form)
 
     def get_queryset(self):
-        get_google_calendar_events(self.request.user)
         return Task.objects.order_by('-due_date')
 
 
@@ -112,6 +111,26 @@ class RegistrationView(SuccessMessageMixin, CreateView):
     form_class = RegistrationForm
     success_message = 'Your profile was created successfully'
 
+
+def integrate_google_calender(request):
+    get_google_calendar_events(request.user)
+    return HttpResponseRedirect('/tasks/calendar-integrated/')
+
+    # if request.method == 'POST':
+    #     form = EmailForm(request.POST)
+    #
+    #     if form.is_valid():
+    #         get_google_calendar_events(request.user)
+    #         return HttpResponseRedirect('/tasks/calendar-integrated/')
+    #
+    # else:
+    #     form = EmailForm()
+    #     context = {'form': form}
+    #     return render(request, 'google_calendar.html', context=context)
+
+
+def calendar_integrated(request):
+    return render(request, 'calendar_integrated.html')
 
 # class TaskListView(generic.ListView, CreateView):
 #     model = Task
