@@ -34,15 +34,6 @@ def get_google_calendar_events(user):
     Prints the start and name of the next 10 events on the user's calendar.
     """
 
-    cred_file = open("google-credentials.json", "r")
-    json_data = cred_file.read()
-    json_data = json.loads(json_data)
-    web_data = json_data['web']
-    client_id = web_data['client_id']
-    client_secret = web_data['client_secret']
-
-    # print(refresh_google_api_token())
-
     events = []
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -98,18 +89,18 @@ def get_google_calendar_events(user):
     return events
 
 
-def refresh_google_api_token(client_id, client_secret, refresh_token):
-    params = {
-        'grant_type': 'refresh_token',
-        'client_id': client_id,
-        'client_secret': client_secret,
-        'refresh_token': refresh_token,
-    }
-
-    authorization_url = "https://oauth2.googleapis.com/token"
-    response = requests.post(authorization_url, data=params)
-
-    if response.ok:
-        return response.json()
-    else:
-        return None
+# def refresh_google_api_token(client_id, client_secret, refresh_token):
+#     params = {
+#         'grant_type': 'refresh_token',
+#         'client_id': client_id,
+#         'client_secret': client_secret,
+#         'refresh_token': refresh_token,
+#     }
+#
+#     authorization_url = "https://oauth2.googleapis.com/token"
+#     response = requests.post(authorization_url, data=params)
+#
+#     if response.ok:
+#         return response.json()
+#     else:
+#         return None

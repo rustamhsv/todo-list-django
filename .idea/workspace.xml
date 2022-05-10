@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d4ce0a9-4349-4930-8864-93bea59ff8c8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/tasks/templates/calendar_integrated.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tasks/templates/google_calendar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/tasks.py" afterDir="false" />
